@@ -93,7 +93,7 @@
         <!-- الشاشة الرئيسية مع خيارات الخط -->
         <div id="start-screen" class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-6 border border-white/40">
             <div class="text-center mb-4">
-                <h1 class="text-3xl font-extrabold bg-gradient-to-l from-indigo-700 to-sky-600 bg-clip-text text-transparent">✍️ مسابقة الحروف </h1>
+                <h1 class="text-3xl font-extrabold bg-gradient-to-l from-indigo-700 to-sky-600 bg-clip-text text-transparent">✍️ مسابقة  </h1>
                 <p class="text-sm text-gray-500 mt-2">أ /: <span class="font-bold text-indigo-600">أسامة إبراهيم</span></p>
                 <div class="mt-3 inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-semibold">🎓 الطالب: قيس أحمد</div>
             </div>
@@ -116,7 +116,7 @@
                     📊 عرض التقرير
                 </button>
             </div>
-            <p class="text-center text-xs text-gray-400 mt-6">✨ أسئلة تشمل جميع أشكال الحروف (أول، وسط، آخر)</p>
+            <p class="text-center text-xs text-gray-400 mt-6">✨ أسئلة تشمل جميع أشكال  (أول، وسط، آخر)</p>
         </div>
 
         <!-- منطقة الاختبار مع الأزرار في الأسفل -->
@@ -158,7 +158,7 @@
     </div>
 
     <script>
-        // ---------- بيانات الحروف ----------
+        // ---------- بيانات  ----------
         const alphabet = [
             {base:"أ", d:{"أول":"أ","آخر":"ـأ"}},
             {base:"ب", d:{"أول":"بـ","وسط":"ـبـ","آخر":"ـب"}},
@@ -429,7 +429,7 @@
                         <div class="w-full bg-gray-200 rounded-full h-2 mb-3"><div class="bg-gradient-to-l from-indigo-500 to-emerald-500 h-2 rounded-full" style="width:${percent}%"></div></div>
                         <div class="flex flex-wrap gap-2 mt-1">
                             <button onclick="togglePanel('${detailsId}')" class="toggle-btn flex-1 flex justify-center gap-1 bg-indigo-50 text-indigo-700 py-2 rounded-xl text-sm">
-                                📖 عرض كل الحروف <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                📖 عرض كل  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
                             <button onclick="togglePanel('${errorsId}')" class="toggle-btn flex-1 flex justify-center gap-1 bg-red-50 text-red-700 py-2 rounded-xl text-sm">
                                 ❌ عرض الأخطاء فقط <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
