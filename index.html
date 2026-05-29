@@ -33,7 +33,7 @@
             opacity: 1;
             margin-top: 1rem;
         }
-        /* خطوط الكتابة حسب الاختيار */
+        /* خطوط احترافية */
         .font-cairo {
             font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
         }
@@ -43,12 +43,9 @@
         .font-noto {
             font-family: 'Noto Naskh Arabic', 'Scheherazade New', serif;
         }
-        /* تحميل الخطوط من Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap');
-        /* تطبيق الخط الافتراضي على الجسم */
-        body.font-cairo, body.font-amiri, body.font-noto {
-            transition: font-family 0.2s;
-        }
+        
+        /* حجم الحرف كبير وواضح */
         .letter-big {
             font-size: 13rem;
             line-height: 1.2;
@@ -63,9 +60,35 @@
                 font-size: 7rem;
             }
         }
+        /* تنسيق منطقة الاختبار بحيث الأزرار في الأسفل */
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 80vh;
+        }
+        .letter-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .buttons-area {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .action-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: stretch;
+        }
+        .action-row button {
+            flex: 1;
+        }
     </style>
 </head>
-<body class="font-cairo">
+<body class="font-amiri"> <!-- الافتراضي الآن أميري -->
     <div id="app" class="max-w-2xl mx-auto">
         <!-- الشاشة الرئيسية مع خيارات الخط -->
         <div id="start-screen" class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-6 border border-white/40">
@@ -75,13 +98,13 @@
                 <div class="mt-3 inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-semibold">🎓 الطالب: قيس أحمد</div>
             </div>
             
-            <!-- اختيار نوع الخط -->
+            <!-- اختيار نوع الخط بشكل احترافي -->
             <div class="mt-4 bg-gray-50 p-3 rounded-xl">
-                <label class="block text-sm font-bold text-gray-700 mb-2">📝 اختر نوع الخط:</label>
+                <label class="block text-sm font-bold text-gray-700 mb-2">📝 نوع الخط:</label>
                 <div class="flex flex-wrap gap-3 justify-center">
-                    <button onclick="changeFont('cairo')" class="font-cairo px-4 py-2 rounded-xl bg-indigo-100 text-indigo-800 text-sm font-semibold shadow-sm hover:bg-indigo-200 transition">كايرو (افتراضي)</button>
-                    <button onclick="changeFont('amiri')" class="font-amiri px-4 py-2 rounded-xl bg-amber-100 text-amber-800 text-sm font-semibold shadow-sm hover:bg-amber-200 transition">نسخ مدرسية (Amiri)</button>
-                    <button onclick="changeFont('noto')" class="font-noto px-4 py-2 rounded-xl bg-emerald-100 text-emerald-800 text-sm font-semibold shadow-sm hover:bg-emerald-200 transition">نسخ مدرسية (Noto Naskh)</button>
+                    <button onclick="changeFont('cairo')" class="font-cairo px-4 py-2 rounded-xl bg-white text-indigo-800 text-sm font-semibold shadow-sm hover:bg-indigo-100 transition border">كايرو</button>
+                    <button onclick="changeFont('amiri')" class="font-amiri px-4 py-2 rounded-xl bg-indigo-100 text-indigo-800 text-sm font-semibold shadow-sm hover:bg-indigo-200 transition border border-indigo-300">أميري (افتراضي)</button>
+                    <button onclick="changeFont('noto')" class="font-noto px-4 py-2 rounded-xl bg-white text-emerald-800 text-sm font-semibold shadow-sm hover:bg-emerald-100 transition border">نسخ</button>
                 </div>
             </div>
             
@@ -96,24 +119,29 @@
             <p class="text-center text-xs text-gray-400 mt-6">✨ أسئلة تشمل جميع أشكال الحروف (أول، وسط، آخر)</p>
         </div>
 
-        <!-- منطقة الاختبار مع أزرار صح/خطأ في صف واحد وزر الإنهاء أسفلهما -->
-        <div id="game-zone" class="hidden bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-5 border border-white/40">
+        <!-- منطقة الاختبار مع الأزرار في الأسفل -->
+        <div id="game-zone" class="hidden bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-5 border border-white/40 game-container">
             <div class="flex justify-between items-center mb-2">
                 <span class="font-bold text-indigo-700 bg-indigo-50 px-4 py-1 rounded-full text-sm">قيس أحمد</span>
                 <span id="counter" class="text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full"></span>
             </div>
-            <div class="text-center my-4">
-                <div class="text-sm font-medium text-gray-500 mb-2">الشكل الحالي:</div>
-                <!-- مربع الحرف كبير جداً -->
-                <div id="letter-display" class="letter-big font-black py-4 mb-2 bg-gradient-to-b from-gray-50 to-gray-100 rounded-3xl border border-gray-200 shadow-inner flex items-center justify-center h-48">—</div>
+            
+            <!-- منطقة الحرف تأخذ مساحة كبيرة -->
+            <div class="letter-area">
+                <div class="text-center">
+                    <div class="text-sm font-medium text-gray-500 mb-2">الشكل الحالي:</div>
+                    <div id="letter-display" class="letter-big font-black py-4 mb-2 bg-gradient-to-b from-gray-50 to-gray-100 rounded-3xl border border-gray-200 shadow-inner flex items-center justify-center h-48">—</div>
+                </div>
             </div>
-            <!-- صف أزرار صح وخطأ -->
-            <div class="grid grid-cols-2 gap-4 mt-4">
-                <button onclick="saveResult(false)" class="bg-red-500 active:bg-red-700 text-white py-5 rounded-2xl text-xl font-bold shadow-lg flex items-center justify-center gap-2">❌ خطأ</button>
-                <button onclick="saveResult(true)" class="bg-green-500 active:bg-green-700 text-white py-5 rounded-2xl text-xl font-bold shadow-lg flex items-center justify-center gap-2">✅ صح</button>
+            
+            <!-- الأزرار في الأسفل مع مسافة -->
+            <div class="buttons-area">
+                <div class="action-row">
+                    <button onclick="saveResult(false)" class="bg-red-500 active:bg-red-700 text-white py-5 rounded-2xl text-xl font-bold shadow-lg flex items-center justify-center gap-2">❌ خطأ</button>
+                    <button onclick="saveResult(true)" class="bg-green-500 active:bg-green-700 text-white py-5 rounded-2xl text-xl font-bold shadow-lg flex items-center justify-center gap-2">✅ صح</button>
+                </div>
+                <button onclick="cancelTest()" class="w-full bg-gray-200 text-gray-700 py-3 rounded-xl text-sm font-medium active:bg-gray-300">↩️ إنهاء الاختبار والعودة</button>
             </div>
-            <!-- زر الإنهاء في الأسفل بمفرده -->
-            <button onclick="cancelTest()" class="mt-5 w-full bg-gray-200 text-gray-700 py-3 rounded-xl text-sm font-medium active:bg-gray-300">↩️ إنهاء الاختبار والعودة</button>
         </div>
 
         <!-- منطقة التقرير -->
@@ -172,7 +200,6 @@
         // ---------- إدارة الخط ----------
         function changeFont(fontType) {
             const body = document.body;
-            // إزالة جميع كلاسات الخط السابقة
             body.classList.remove('font-cairo', 'font-amiri', 'font-noto');
             if (fontType === 'cairo') {
                 body.classList.add('font-cairo');
@@ -182,18 +209,13 @@
                 body.classList.add('font-noto');
             }
             localStorage.setItem('selectedFont', fontType);
-            // تحديث عرض الحرف الحالي إن كان الاختبار مفتوحاً
-            const letterDiv = document.getElementById('letter-display');
-            if (letterDiv && letterDiv.innerText !== '—') {
-                // فقط إعادة تطبيق الخط، النص يبقى كما هو
-            }
         }
         
         function loadSavedFont() {
             const saved = localStorage.getItem('selectedFont');
-            if (saved === 'amiri') changeFont('amiri');
+            if (saved === 'cairo') changeFont('cairo');
             else if (saved === 'noto') changeFont('noto');
-            else changeFont('cairo'); // الافتراضي كايرو
+            else changeFont('amiri'); // الافتراضي أميري
         }
         
         // ---------- التخزين ----------
@@ -237,7 +259,6 @@
                 currentTestQueue.sort(() => Math.random() - 0.5);
             }
             currentTestIndex = 0;
-            // تهيئة النتائج لجميع الحروف
             currentTestResults = {};
             for (let letter of alphabet) {
                 let posObj = {};
@@ -454,7 +475,7 @@
         
         // التهيئة
         initStudent();
-        loadSavedFont(); // تطبيق الخط المحفوظ أو الافتراضي كايرو
+        loadSavedFont();
     </script>
 </body>
 </html>
